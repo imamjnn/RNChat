@@ -5,6 +5,7 @@ import Tab2 from './components/Tabs/Tab2';
 import Tab3 from './components/Tabs/Tab3';
 import Profile from './components/Profile';
 import Login from './components/Login';
+import Chat from './components/Chats/Chat';
 
 export const Tabs = TabNavigator(
   {
@@ -74,5 +75,16 @@ export const SignedIn = StackNavigator({
         backgroundColor: '#f50057'
       }
     }
+  },
+  Chat: {
+    screen: Chat,
+    path: 'user/:item',
+    navigationOptions: ({navigation}) => ({
+      title: `${navigation.state.params.item.name}`,
+      headerTintColor: 'white',
+      headerStyle: {
+        backgroundColor: '#f50057'
+      }
+    })
   }
 });
