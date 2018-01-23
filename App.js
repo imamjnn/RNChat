@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ActivityIndicator } from 'react-native';
 import { SignedIn, SignedOut } from './src/routes';
-import { checkUser } from './src/auth';
+import { checkUser } from './src/config/auth';
 
 export default class App extends Component {
   constructor(props) {

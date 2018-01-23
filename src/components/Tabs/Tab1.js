@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, StatusBar, FlatList, ActivityIndicator } from 'react-native';
 import { List, ListItem } from 'react-native-elements';
-import { getUser } from '../../services/auth';
+import { getUser } from '../../services/UserData';
 
 class Tab1 extends Component {
   constructor(props) {

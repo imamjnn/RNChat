@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Button, AsyncStorage } from 'react-native';
-import { getUserStorage } from '../services/localStorage';
+import { getUserStorage } from '../services/LocalStorage';
 
 class Profile extends Component {
   constructor(props){

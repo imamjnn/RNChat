@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TextInput, Button, AsyncStorage, Keyboard, StatusBar, ScrollView, Image } from 'react-native';
-import { authLogin } from '../services/auth';
-import { saveUserStorage } from '../services/localStorage';
+import { authLogin } from '../config/auth';
+import { saveUserStorage } from '../services/LocalStorage';
 
 class Login extends Component {
   constructor(props){
