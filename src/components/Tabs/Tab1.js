@@ -1,81 +1,53 @@
+//import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, StatusBar, FlatList, ActivityIndicator } from 'react-native';
-import { List, ListItem } from 'react-native-elements';
-import { getUser } from '../../services/UserData';
+import { View, Text, StyleSheet, TextInput, Button } from 'react-native';
+import { sendMessage, loadMessages, closeChat, listItems } from '../../services/ChatData';
+import { getUserStorage } from '../../services/LocalStorage';
+import { GiftedChat } from 'react-native-gifted-chat';
 
+// create a component
 class Tab1 extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      users: [],
-      isLoading: true
+      messages: [],
+      message: '',
+      me: ''
     }
-  }
-
-  onRefresh = () => {
-    getUser().then(data => {
-      console.log(data);
-      this.setState({ users: data.users, isLoading: false })
-    })
   }
 
   componentDidMount() {
-    this.onRefresh()
+    getUserStorage().then(res => {
+      this.setState({ me: res.user })
+    })
+    loadMessages((message) => {
+      this.setState((previousState) => {
+        return {
+          messages: GiftedChat.append(previousState.messages, message),
+        };
+      });
+    })
   }
 
-  onPressList = (item) => {
-    this.props.navigation.navigate('Chat', {item})
-  }
-
-  _keyExtractor = (item, index) => item.id;
-
-  _renderItem = ({item}) => {
-    let getData = {id: item.id, name: item.name, avatar: item.avatar};
-    return (
-      <View>
-        <ListItem
-          roundAvatar
-          title={item.name}
-          subtitle={item.email}
-          avatar={{uri: item.avatar}}
-          onPress={() => this.onPressList(getData)}
-        />
-      </View>
-    )
+  componentWillUnmount() {
+    closeChat();
   }
 
   render() {
-    if(this.state.isLoading){
-      return (
-        <View style={styles.containerActivity}>
-            <ActivityIndicator size="large" color="#f50057"/>
-        </View>
-      );
-    }
     return (
-      <View style={styles.container}>
-        <StatusBar backgroundColor="#f50057" />
-        <FlatList 
-          data={this.state.users}
-          renderItem={this._renderItem}
-          keyExtractor={this._keyExtractor}
-        />
-      </View>
+      <GiftedChat
+        messages={this.state.messages}
+        onSend={(message) => {
+          sendMessage(message);
+        }}
+        user={{
+          _id: this.state.me,
+          name: 'koko',
+        }}
+      />
+      
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'white',
-  },
-  containerActivity: {
-    flex: 2,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'white',
-  },
-});
 
 export default Tab1;

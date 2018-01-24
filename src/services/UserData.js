@@ -1,8 +1,9 @@
 import React from 'react';
 import { Alert, AsyncStorage } from 'react-native';
 import { getUserStorage } from './LocalStorage';
+import Storage from '../services/Storage';
 
-const url = 'http://192.168.1.14/~jnn007/cingular/api/user';
+const url = 'https://kodean.000webhostapp.com/api/user';
 
 // Get user
 async function getUser() {
@@ -10,7 +11,7 @@ async function getUser() {
     let response = await fetch(`${url}/getuser`, {
       method: 'GET',
       headers: {
-        'Authorization': '9839e870ae0eed2e2cb810c39c9f3ac5',
+        'Authorization': Storage.getToken(),
       }
     });
     //save token

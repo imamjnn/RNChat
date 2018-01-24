@@ -2,7 +2,7 @@ import React from 'react';
 import { Alert, AsyncStorage } from 'react-native';
 //import { getUserStorage } from '../services/LocalStorage';
 
-const url = 'http://192.168.1.14/~jnn007/cingular/api/auth';
+const url = 'https://kodean.000webhostapp.com/api/auth';
 
 const checkUser = () => {
   return new Promise((resolve) => {

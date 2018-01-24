@@ -12,7 +12,7 @@ export const Tabs = TabNavigator(
     Tab1: {
       screen: Tab1,
       navigationOptions: {
-        tabBarLabel: 'Chat'
+        tabBarLabel: 'Global Chat'
       }
     },
     Tab2: {

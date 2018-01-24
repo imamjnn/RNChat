@@ -1,8 +1,9 @@
 //import liraries
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TextInput, Button } from 'react-native';
-import { sendMessage, loadMessages, closeChat } from '../../services/ChatData';
+import { sendMessage, loadMessages, closeChat, listItems } from '../../services/ChatData';
 import { getUserStorage } from '../../services/LocalStorage';
+import { GiftedChat } from 'react-native-gifted-chat';
 
 // create a component
 class Chat extends Component {
@@ -19,9 +20,14 @@ class Chat extends Component {
     getUserStorage().then(res => {
       this.setState({ me: res.user })
     })
-    loadMessages((mess) => {
-      console.log(mess)
-      this.setState({messages: mess})
+    // const meId = this.state.me;
+    // const forId = this.props.navigation.state.params.item.id;
+    loadMessages((message) => {
+      this.setState((previousState) => {
+        return {
+          messages: GiftedChat.append(previousState.messages, message),
+        };
+      });
     })
   }
 
@@ -39,23 +45,18 @@ class Chat extends Component {
   }
 
   render() {
-    const pesan = this.state.messages;
-    console.log('kofet '+pesan.text)
     return (
-      <View style={styles.container}>
-        {/* {pesan.map((pes, index) => {
-          return <Text>{pes.text}</Text>
-        })} */}
-        
-        <TextInput
-          placeholder='Type your message'
-          onChangeText={(mess) => this.setState({ message: mess })}
-        />
-        <Button 
-          title='Sent'
-          onPress={() => this._onPressSend()}
-        />
-      </View>
+      <GiftedChat
+        messages={this.state.messages}
+        onSend={(message) => {
+          sendMessage(message);
+        }}
+        user={{
+          _id: this.state.me,
+          _messFor: this.props.navigation.state.params.item.id,
+          name: 'koko',
+        }}
+      />
     );
   }
 }

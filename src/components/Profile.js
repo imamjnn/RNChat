@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Button, AsyncStorage } from 'react-native';
-import { getUserStorage } from '../services/LocalStorage';
+import { getUserStorage, getMeId } from '../services/LocalStorage';
+import Storage from '../services/Storage';
 
 class Profile extends Component {
   constructor(props){
@@ -12,7 +13,7 @@ class Profile extends Component {
 
   componentDidMount() {
     getUserStorage().then((res) => {
-      console.log('inininini '+res.id)
+      console.log('inininini '+Storage.getUid())
       this.setState({userData: res})
     })
   }
