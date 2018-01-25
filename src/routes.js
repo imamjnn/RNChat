@@ -31,14 +31,14 @@ export const Tabs = TabNavigator(
   {
     tabBarOptions: {
       style: {
-        backgroundColor: '#f50057'
+        backgroundColor: 'black'
       },
       //activeTintColor: 'black',
       labelStyle: {
         fontSize: 13,
       },
       indicatorStyle: {
-        backgroundColor: 'black'
+        backgroundColor: '#f50057'
       }
     }
   }
@@ -62,7 +62,7 @@ export const SignedIn = StackNavigator({
       headerTintColor: 'white',
       headerStyle: {
         elevation: 0,
-        backgroundColor: '#f50057'
+        backgroundColor: 'black'
       }
     }
   },

@@ -39,7 +39,7 @@ class Login extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <StatusBar backgroundColor="#f50057" />
+        <StatusBar backgroundColor="black" />
         
         <View style={styles.s_image}> 
           <Image 
@@ -69,7 +69,7 @@ class Login extends Component {
 
         <Button 
           title='Login'
-          color='black'
+          color='#f50057'
           disabled={this.state.isDisabled}
           onPress={() => this._onLogin()}
         />
@@ -84,13 +84,13 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 40,
     justifyContent: 'center',
-    backgroundColor: '#f50057',
+    backgroundColor: 'black',
   },
   s_text: {
     backgroundColor: 'white',
     height: 40,
     borderWidth: 1,
-    borderColor: 'black'
+    borderColor: '#f50057'
   },
   s_image: {
     alignItems: 'center',
