@@ -18,13 +18,13 @@ export const Tabs = TabNavigator(
     Tab2: {
       screen: Tab2,
       navigationOptions: {
-        tabBarLabel: 'Me'
+        tabBarLabel: 'Group Chat'
       }
     },
     Tab3: {
       screen: Tab3,
       navigationOptions: {
-        tabBarLabel: 'About'
+        tabBarLabel: 'Profile'
       }
     }
   },
@@ -33,7 +33,7 @@ export const Tabs = TabNavigator(
       style: {
         backgroundColor: '#f50057'
       },
-      activeTintColor: 'black',
+      //activeTintColor: 'black',
       labelStyle: {
         fontSize: 13,
       },

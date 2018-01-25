@@ -4,14 +4,10 @@ import { NavigationActions } from 'react-navigation'
 
 class Tab2 extends Component {
 
-  _onPressButton = () => {
-    this.props.navigation.navigate('Profile')
-  }
-
   render() {
     return (
       <View style={styles.container}>
-        <Button title='Setting' color='#f50057' onPress={this._onPressButton} />
+        <Text>Comming soon.. :)</Text>
       </View>
     );
   }

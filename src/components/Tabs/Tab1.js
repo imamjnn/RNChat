@@ -1,9 +1,9 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TextInput, Button } from 'react-native';
+import { View, Text, StyleSheet, TextInput, Button, Image } from 'react-native';
 import { sendMessage, loadMessages, closeChat, listItems } from '../../services/ChatData';
 import { getUserStorage } from '../../services/LocalStorage';
-import { GiftedChat } from 'react-native-gifted-chat';
+import { GiftedChat, Send, Bubble } from 'react-native-gifted-chat';
 
 // create a component
 class Tab1 extends Component {
@@ -33,6 +33,34 @@ class Tab1 extends Component {
     closeChat();
   }
 
+  _renderSend(props) {
+    return (
+      <Send
+        {...props}
+      >
+        <View style={{marginRight: 5, marginBottom: 5}}>
+          <Image style={{width: 33, height: 33}} source={require('../../images/send.png')} resizeMode={'center'}/>
+        </View>
+      </Send>
+    );
+  }
+
+  _renderBubble(props) {
+    return (
+      <Bubble
+        {...props}
+        wrapperStyle={{
+          letft: {
+            //backgroundColor: 'white'
+          },
+          right: {
+            backgroundColor: '#f50057'
+          }
+        }}
+      />
+    )
+  }
+
   render() {
     return (
       <GiftedChat
@@ -44,6 +72,9 @@ class Tab1 extends Component {
           _id: this.state.me,
           name: 'koko',
         }}
+        isLoadingEarlier={true}
+        renderSend={this._renderSend}
+        renderBubble={this._renderBubble}
       />
       
     );

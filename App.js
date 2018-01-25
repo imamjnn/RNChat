@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ActivityIndicator } from 'react-native';
+import { ActivityIndicator, View, StatusBar } from 'react-native';
 import { SignedIn, SignedOut } from './src/routes';
 import { checkUser } from './src/config/auth';
 
@@ -23,7 +23,12 @@ export default class App extends Component {
 
   render() {
     if(!this.state.checkLogin){
-      return <ActivityIndicator color='#f50057' />
+      return (
+        <View>
+          <StatusBar backgroundColor="#f50057" />
+          <ActivityIndicator color='#f50057' />
+        </View>
+      ) 
     }
     return this.state.loggedIn ?
       <SignedIn screenProps={{changeLoginState: this.handleChangeLoginState}} /> :
