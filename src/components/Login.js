@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TextInput, Button, AsyncStorage, Keyboard, StatusBar, ScrollView, Image } from 'react-native';
+import { View, Text, StyleSheet, TextInput, Button, AsyncStorage, Keyboard, StatusBar, ScrollView, Image, Alert } from 'react-native';
 import { authLogin } from '../config/auth';
 import { saveUserStorage } from '../services/LocalStorage';
 
@@ -16,10 +16,16 @@ class Login extends Component {
   _onLogin = () => {
     this.setState({isDisabled: true});
     authLogin(this.state.username, this.state.password).then(res => {
-      saveUserStorage(res.user, res.token);
-      this.setState({isDisabled: false});
-      return this.props.screenProps.changeLoginState(true);
-      Keyboard.dismiss();
+      if(res.status == 'success'){
+        saveUserStorage(res.user, res.token);
+        this.setState({isDisabled: false});
+        return this.props.screenProps.changeLoginState(true);
+        Keyboard.dismiss();
+      }else{
+        Alert.alert(res.message);
+        this.setState({isDisabled: false});
+      }
+      
     })
   }
 

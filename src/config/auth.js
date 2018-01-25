@@ -36,4 +36,18 @@ async function authLogin(userName, passWord) {
   }
 }
 
-export { authLogin, checkUser };
+async function authLogout(token) {
+  try{
+    let response = await fetch(`${url}/native_logout/${token}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    });
+    return response.json();
+  } catch(error){
+    console.log(error);
+  }
+}
+
+export { authLogin, checkUser, authLogout };

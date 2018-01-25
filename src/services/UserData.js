@@ -6,9 +6,9 @@ import Storage from '../services/Storage';
 const url = 'https://kodean.000webhostapp.com/api/user';
 
 // Get user
-async function getUser() {
+async function getUser(id) {
   try{
-    let response = await fetch(`${url}/getuser`, {
+    let response = await fetch(`${url}/getuser/${id}`, {
       method: 'GET',
       headers: {
         'Authorization': Storage.getToken(),

@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Button, AsyncStorage } from 'react-native';
+import { View, Text, StyleSheet, Button, AsyncStorage, Alert } from 'react-native';
 import { getUserStorage, getMeId } from '../services/LocalStorage';
+import { authLogout } from '../config/auth';
 import Storage from '../services/Storage';
 
 class Profile extends Component {
   constructor(props){
     super(props);
     this.state = {
-      userData: []
+      userData: [],
+      isDisabled: false
     }
   }
 
@@ -19,9 +21,18 @@ class Profile extends Component {
   }
 
   _onPressLogout = () => {
-    AsyncStorage.removeItem('users').then(res => {
-      this.props.screenProps.changeLoginState(false)
+    this.setState({isDisabled: true});
+    authLogout(Storage.getToken()).then(response => {
+      if(response.status == 'success'){
+        AsyncStorage.removeItem('users').then(res => {
+          this.props.screenProps.changeLoginState(false)
+        })
+      }else{
+        this.setState({isDisabled: false})
+        Alert.alert(response.message)
+      }
     })
+    
   }
 
   render() {
@@ -29,7 +40,12 @@ class Profile extends Component {
     return (
       <View style={styles.container}>
         <Text>{user.token}</Text>
-        <Button title='Logout' color='red' onPress={() => this._onPressLogout()} />
+        <Button 
+          title='Logout' 
+          color='red' 
+          disabled={this.state.isDisabled}
+          onPress={() => this._onPressLogout()}
+        />
       </View>
     );
   }
