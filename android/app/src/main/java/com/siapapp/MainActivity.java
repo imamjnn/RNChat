@@ -1,4 +1,4 @@
-package com.siapapp;
+package com.cetingan.jnn;
 
 import com.facebook.react.ReactActivity;
 

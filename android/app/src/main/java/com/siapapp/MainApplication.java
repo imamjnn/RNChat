@@ -1,4 +1,4 @@
-package com.siapapp;
+package com.cetingan.jnn;
 
 import android.app.Application;
 
